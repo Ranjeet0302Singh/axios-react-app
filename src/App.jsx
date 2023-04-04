@@ -6,11 +6,27 @@ function App() {
   const [myData, setMyData] = useState([]);
   const [isError, setIsError] = useState("");
 
+  // By using Promise
+  // useEffect(() => {
+  //   axios
+  //     .get("https://jsonplaceholder.typicode.com/posts")
+  //     .then((Response) => setMyData(Response.data))
+  //     .catch((Error) => setIsError(Error.message));
+  // }, []);
+
+  // by using async await
+  const getApiData = async () => {
+    try {
+      const Response = await axios.get(
+        "https://jsonplaceholder.typicode.com/posts"
+      );
+      setMyData(Response.data);
+    } catch (Error) {
+      setIsError(Error.message);
+    }
+  };
   useEffect(() => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/posts")
-      .then((Response) => setMyData(Response.data))
-      .catch((Error) => setIsError(Error.message));
+    getApiData();
   }, []);
 
   return (
