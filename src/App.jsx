@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import axios from "axios";
+import axios from "./axios";
 
 function App() {
   const [myData, setMyData] = useState([]);
@@ -17,9 +17,7 @@ function App() {
   // by using async await
   const getApiData = async () => {
     try {
-      const Response = await axios.get(
-        "https://jsonplaceholder.typicode.com/posts"
-      );
+      const Response = await axios.get("/posts");
       setMyData(Response.data);
     } catch (Error) {
       setIsError(Error.message);
